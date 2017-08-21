@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.2.0" method="upgrade">
+	<name>COM_BULLETIN_BOARD</name>
+	<creationDate>2017-08-17</creationDate>
+	<author>Dmitry Zatulenko</author>
+	<autorEmail>zatulenko@gmail.com</autorEmail>
+	<autorUrl>http://</autorUrl>
+	<copyright>Copyright Info</copyright>
+	<license>COM_BULLETIN_BOARD_XML_LICENSE</license>
+	<version>1.0.0</version>
+	<description>COM_BULLETIN_BOARD_XML_DESCRIPTION</description>
+	
+	<scriptfile>install.php</scriptfile>
+	<install folder="admin">
+		<sql>
+			<file driver='mysql' charset='utf8'>sql/install.mysql.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file driver='mysql' charset='utf8'>sql/uninstall.mysql.sql</file>
+		</sql>
+	</uninstall>
+	<update>
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+	
+	<languages folder="site/language">
+		<language tag="ru-RU">ru-RU/ru-RU.com_bulletin_board.ini</language>
+	</languages>
+
+	<files folder="site">
+		<folder>assets</folder>
+		<folder>controllers</folder>
+		<folder>helpers</folder>
+		<folder>language</folder>
+		<folder>models</folder>
+		<folder>tables</folder>
+		<folder>views</folder>
+		<filename>controller.php</filename>
+		<filename>bulletin_board.php</filename>
+		<filename>index.html</filename>
+	</files>
+	
+	<media folder="media" destination="com_bulletin_board">
+		<folder>images</folder>
+		<filename>index.html</filename>
+	</media>
+
+	<administration>
+		<menu img="../media/com_bulletin_board/images/edit.png" link="index.php?option=com_bulletin_board">COM_BULLETIN_BOARD_XML_MENU_NAME</menu>
+		<submenu>
+			<menu view="posts">COM_BULLETIN_BOARD_XML_SUBMENU_POSTS</menu>
+			<menu view="categories">COM_BULLETIN_BOARD_XML_SUBMENU_CATEGORIES</menu>
+			<menu view="types">COM_BULLETIN_BOARD_XML_SUBMENU_TYPES</menu>
+		</submenu>
+		<files folder="admin">
+			<folder>assets</folder>
+			<folder>controllers</folder>
+			<folder>helpers</folder>
+			<folder>language</folder>
+			<folder>models</folder>
+			<folder>sql</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+			<filename>controller.php</filename>
+			<filename>bulletin_board.php</filename>
+			<filename>index.html</filename>
+		</files>
+		<languages folder="admin/language">
+			<language tag="ru-RU">ru-RU/ru-RU.com_bulletin_board.ini</language>
+			<language tag="ru-RU">ru-RU/ru-RU.com_bulletin_board.sys.ini</language>
+		</languages>
+	</administration>
+</extension>
