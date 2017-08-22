@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.2.0" method="upgrade">
-	<name>COM_BULLETIN_BOARD</name>
+	<name>COM_BULLETINBOARD</name>
 	<creationDate>2017-08-17</creationDate>
 	<author>Dmitry Zatulenko</author>
 	<autorEmail>zatulenko@gmail.com</autorEmail>
 	<autorUrl>http://</autorUrl>
 	<copyright>Copyright Info</copyright>
-	<license>COM_BULLETIN_BOARD_XML_LICENSE</license>
+	<license>COM_BULLETINBOARD_XML_LICENSE</license>
 	<version>1.0.0</version>
-	<description>COM_BULLETIN_BOARD_XML_DESCRIPTION</description>
+	<description>COM_BULLETINBOARD_XML_DESCRIPTION</description>
 	
 	<scriptfile>install.php</scriptfile>
 	<install folder="admin">
@@ -28,7 +28,7 @@
 	</update>
 	
 	<languages folder="site/language">
-		<language tag="ru-RU">ru-RU/ru-RU.com_bulletin_board.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.com_bulletinboard.ini</language>
 	</languages>
 
 	<files folder="site">
@@ -40,21 +40,22 @@
 		<folder>tables</folder>
 		<folder>views</folder>
 		<filename>controller.php</filename>
-		<filename>bulletin_board.php</filename>
+		<filename>bulletinboard.php</filename>
 		<filename>index.html</filename>
 	</files>
 	
-	<media folder="media" destination="com_bulletin_board">
+	<media folder="media" destination="com_bulletinboard">
+		<folder>css</folder>
 		<folder>images</folder>
 		<filename>index.html</filename>
 	</media>
 
 	<administration>
-		<menu img="../media/com_bulletin_board/images/edit.png" link="index.php?option=com_bulletin_board">COM_BULLETIN_BOARD_XML_MENU_NAME</menu>
+		<menu img="../media/com_bulletinboard/images/edit.png" link="index.php?option=com_bulletinboard">COM_BULLETINBOARD_XML_MENU_NAME</menu>
 		<submenu>
-			<menu view="posts">COM_BULLETIN_BOARD_XML_SUBMENU_POSTS</menu>
-			<menu view="categories">COM_BULLETIN_BOARD_XML_SUBMENU_CATEGORIES</menu>
-			<menu view="types">COM_BULLETIN_BOARD_XML_SUBMENU_TYPES</menu>
+			<menu view="posts">COM_BULLETINBOARD_XML_SUBMENU_POSTS</menu>
+			<menu view="categories">COM_BULLETINBOARD_XML_SUBMENU_CATEGORIES</menu>
+			<menu view="types">COM_BULLETINBOARD_XML_SUBMENU_TYPES</menu>
 		</submenu>
 		<files folder="admin">
 			<folder>assets</folder>
@@ -68,12 +69,12 @@
 			<filename>access.xml</filename>
 			<filename>config.xml</filename>
 			<filename>controller.php</filename>
-			<filename>bulletin_board.php</filename>
+			<filename>bulletinboard.php</filename>
 			<filename>index.html</filename>
 		</files>
 		<languages folder="admin/language">
-			<language tag="ru-RU">ru-RU/ru-RU.com_bulletin_board.ini</language>
-			<language tag="ru-RU">ru-RU/ru-RU.com_bulletin_board.sys.ini</language>
+			<language tag="ru-RU">ru-RU/ru-RU.com_bulletinboard.ini</language>
+			<language tag="ru-RU">ru-RU/ru-RU.com_bulletinboard.sys.ini</language>
 		</languages>
 	</administration>
 </extension>
