@@ -30,7 +30,7 @@ class BulletinBoardViewTypes extends JViewLegacy {
 		//JToolbarHelper::cancel();
 		// Пример с пользовательской кнопкой
 		//JToolbarHelper::custom('type.create','bulletin-board','bulletin-board_hover','JTOOLBAR_PUBLISH', false);
-		JToolbarHelper::preferences('com_BULLETINBOARD');
+		JToolbarHelper::preferences('com_bulletinboard');
 
 		// echo JUri::root()."<br/>";
 		// echo JUri::base()."<br/>";
@@ -40,7 +40,7 @@ class BulletinBoardViewTypes extends JViewLegacy {
 
 	protected function setDocument(){
 		$doc = JFactory::getDocument();
-		$doc->addStyleSheet(JUri::root(true)."/media/com_BULLETINBOARD/css/style.css");
+		$doc->addStyleSheet(JUri::root(true)."/media/com_bulletinboard/css/style.css");
 	}
 }
 
