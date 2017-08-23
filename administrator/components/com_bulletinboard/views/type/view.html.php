@@ -3,13 +3,13 @@ defined('_JEXEC') or die('Restricted Access');
 
 class BulletinBoardViewType extends JViewLegacy {
 
-	protected $title ='';
+	protected $title ='Тип объявления';
 	protected $form;
 	
 	public function display($tpl = null)
 	{
 		$this->form = $this->get('Form'); //getForm
-		var_dump($this->form);
+		//var_dump($this->form);
 
 		$this->addToolBar();
 		$this->setDocument();
