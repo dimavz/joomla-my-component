@@ -29,12 +29,12 @@ CREATE TABLE IF NOT EXISTS `pvtg0_assets` (
   UNIQUE KEY `idx_asset_name` (`name`),
   KEY `idx_lft_rgt` (`lft`,`rgt`),
   KEY `idx_parent_id` (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Дамп данных таблицы my_component.pvtg0_assets: ~54 rows (приблизительно)
 /*!40000 ALTER TABLE `pvtg0_assets` DISABLE KEYS */;
 INSERT INTO `pvtg0_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `title`, `rules`) VALUES
-	(1, 0, 0, 107, 0, 'root.1', 'Root Asset', '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.login.offline":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
+	(1, 0, 0, 111, 0, 'root.1', 'Root Asset', '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.login.offline":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
 	(2, 1, 1, 2, 1, 'com_admin', 'com_admin', '{}'),
 	(3, 1, 3, 6, 1, 'com_banners', 'com_banners', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
 	(4, 1, 7, 8, 1, 'com_cache', 'com_cache', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
@@ -87,7 +87,9 @@ INSERT INTO `pvtg0_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 	(53, 18, 70, 71, 2, 'com_modules.module.86', 'Joomla Version', '{}'),
 	(54, 16, 36, 37, 2, 'com_menus.menu.1', 'Main Menu', '{}'),
 	(55, 1, 103, 104, 1, '#__languages.2', '#__languages.2', '{}'),
-	(63, 1, 105, 106, 1, 'com_bulletin_board', 'COM_BULLETIN_BOARD', '{}');
+	(65, 1, 105, 106, 1, 'com_bulletinboard', 'COM_BULLETINBOARD', '{}'),
+	(66, 1, 107, 108, 1, '#__bulletin_board_types.1', '#__bulletin_board_types.1', '{}'),
+	(67, 1, 109, 110, 1, '#__bulletin_board_types.2', '#__bulletin_board_types.2', '{}');
 /*!40000 ALTER TABLE `pvtg0_assets` ENABLE KEYS */;
 
 
@@ -236,11 +238,7 @@ CREATE TABLE IF NOT EXISTS `pvtg0_bulletin_board_posts` (
   `metakey` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `FK__posts_categories` (`category_id`),
-  KEY `FK__posts_types` (`type_id`),
-  CONSTRAINT `FK__posts_categories` FOREIGN KEY (`category_id`) REFERENCES `pvtg0_bulletin_board_categories` (`id`),
-  CONSTRAINT `FK__posts_types` FOREIGN KEY (`type_id`) REFERENCES `pvtg0_bulletin_board_types` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Дамп данных таблицы my_component.pvtg0_bulletin_board_posts: ~0 rows (приблизительно)
@@ -250,16 +248,19 @@ CREATE TABLE IF NOT EXISTS `pvtg0_bulletin_board_posts` (
 
 -- Дамп структуры для таблица my_component.pvtg0_bulletin_board_types
 CREATE TABLE IF NOT EXISTS `pvtg0_bulletin_board_types` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id` tinyint(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `asset_id` int(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- Дамп данных таблицы my_component.pvtg0_bulletin_board_types: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `pvtg0_bulletin_board_types` DISABLE KEYS */;
+INSERT INTO `pvtg0_bulletin_board_types` (`id`, `name`, `alias`, `state`, `asset_id`) VALUES
+	(1, 'Продам', 'prodam', 1, 66),
+	(2, 'Куплю', 'kuplu', 1, 67);
 /*!40000 ALTER TABLE `pvtg0_bulletin_board_types` ENABLE KEYS */;
 
 
@@ -536,7 +537,7 @@ CREATE TABLE IF NOT EXISTS `pvtg0_extensions` (
   KEY `element_clientid` (`element`,`client_id`),
   KEY `element_folder_clientid` (`element`,`folder`,`client_id`),
   KEY `extension` (`type`,`element`,`folder`,`client_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10014 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10016 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Дамп данных таблицы my_component.pvtg0_extensions: ~161 rows (приблизительно)
 /*!40000 ALTER TABLE `pvtg0_extensions` DISABLE KEYS */;
@@ -574,7 +575,7 @@ INSERT INTO `pvtg0_extensions` (`extension_id`, `package_id`, `name`, `type`, `e
 	(33, 0, 'com_fields', 'component', 'com_fields', '', 1, 1, 1, 0, '{"name":"com_fields","type":"component","creationDate":"March 2016","author":"Joomla! Project","copyright":"(C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.7.0","description":"COM_FIELDS_XML_DESCRIPTION","group":"","filename":"fields"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 	(34, 0, 'com_associations', 'component', 'com_associations', '', 1, 1, 1, 0, '{"name":"com_associations","type":"component","creationDate":"Januar 2017","author":"Joomla! Project","copyright":"(C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.7.0","description":"COM_ASSOCIATIONS_XML_DESCRIPTION","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 	(102, 0, 'LIB_PHPUTF8', 'library', 'phputf8', '', 0, 1, 1, 1, '{"name":"LIB_PHPUTF8","type":"library","creationDate":"2006","author":"Harry Fuecks","copyright":"Copyright various authors","authorEmail":"hfuecks@gmail.com","authorUrl":"http:\\/\\/sourceforge.net\\/projects\\/phputf8","version":"0.5","description":"LIB_PHPUTF8_XML_DESCRIPTION","group":"","filename":"phputf8"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-	(103, 0, 'LIB_JOOMLA', 'library', 'joomla', '', 0, 1, 1, 1, '{"name":"LIB_JOOMLA","type":"library","creationDate":"2008","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"https:\\/\\/www.joomla.org","version":"13.1","description":"LIB_JOOMLA_XML_DESCRIPTION","group":"","filename":"joomla"}', '{"mediaversion":"c4528b92528467efa4ea6befbf15e7e6"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+	(103, 0, 'LIB_JOOMLA', 'library', 'joomla', '', 0, 1, 1, 1, '{"name":"LIB_JOOMLA","type":"library","creationDate":"2008","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"https:\\/\\/www.joomla.org","version":"13.1","description":"LIB_JOOMLA_XML_DESCRIPTION","group":"","filename":"joomla"}', '{"mediaversion":"a2136ec76ddc7aea059792c18313f4c2"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 	(104, 0, 'LIB_IDNA', 'library', 'idna_convert', '', 0, 1, 1, 1, '{"name":"LIB_IDNA","type":"library","creationDate":"2004","author":"phlyLabs","copyright":"2004-2011 phlyLabs Berlin, http:\\/\\/phlylabs.de","authorEmail":"phlymail@phlylabs.de","authorUrl":"http:\\/\\/phlylabs.de","version":"0.8.0","description":"LIB_IDNA_XML_DESCRIPTION","group":"","filename":"idna_convert"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 	(105, 0, 'FOF', 'library', 'fof', '', 0, 1, 1, 1, '{"name":"FOF","type":"library","creationDate":"2015-04-22 13:15:32","author":"Nicholas K. Dionysopoulos \\/ Akeeba Ltd","copyright":"(C)2011-2015 Nicholas K. Dionysopoulos","authorEmail":"nicholas@akeebabackup.com","authorUrl":"https:\\/\\/www.akeebabackup.com","version":"2.4.3","description":"LIB_FOF_XML_DESCRIPTION","group":"","filename":"fof"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 	(106, 0, 'LIB_PHPASS', 'library', 'phpass', '', 0, 1, 1, 1, '{"name":"LIB_PHPASS","type":"library","creationDate":"2004-2006","author":"Solar Designer","copyright":"","authorEmail":"solar@openwall.com","authorUrl":"http:\\/\\/www.openwall.com\\/phpass\\/","version":"0.3","description":"LIB_PHPASS_XML_DESCRIPTION","group":"","filename":"phpass"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -667,9 +668,9 @@ INSERT INTO `pvtg0_extensions` (`extension_id`, `package_id`, `name`, `type`, `e
 	(449, 0, 'plg_authentication_cookie', 'plugin', 'cookie', 'authentication', 0, 1, 1, 0, '{"name":"plg_authentication_cookie","type":"plugin","creationDate":"July 2013","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_AUTH_COOKIE_XML_DESCRIPTION","group":"","filename":"cookie"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 	(450, 0, 'plg_twofactorauth_yubikey', 'plugin', 'yubikey', 'twofactorauth', 0, 0, 1, 0, '{"name":"plg_twofactorauth_yubikey","type":"plugin","creationDate":"September 2013","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.0","description":"PLG_TWOFACTORAUTH_YUBIKEY_XML_DESCRIPTION","group":"","filename":"yubikey"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 	(451, 0, 'plg_search_tags', 'plugin', 'tags', 'search', 0, 1, 1, 0, '{"name":"plg_search_tags","type":"plugin","creationDate":"March 2014","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"PLG_SEARCH_TAGS_XML_DESCRIPTION","group":"","filename":"tags"}', '{"search_limit":"50","show_tagged_items":"1"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-	(452, 0, 'plg_system_updatenotification', 'plugin', 'updatenotification', 'system', 0, 1, 1, 0, '{"name":"plg_system_updatenotification","type":"plugin","creationDate":"May 2015","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.5.0","description":"PLG_SYSTEM_UPDATENOTIFICATION_XML_DESCRIPTION","group":"","filename":"updatenotification"}', '{"lastrun":1503316838}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+	(452, 0, 'plg_system_updatenotification', 'plugin', 'updatenotification', 'system', 0, 1, 1, 0, '{"name":"plg_system_updatenotification","type":"plugin","creationDate":"May 2015","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.5.0","description":"PLG_SYSTEM_UPDATENOTIFICATION_XML_DESCRIPTION","group":"","filename":"updatenotification"}', '{"lastrun":1503489769}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 	(453, 0, 'plg_editors-xtd_module', 'plugin', 'module', 'editors-xtd', 0, 1, 1, 0, '{"name":"plg_editors-xtd_module","type":"plugin","creationDate":"October 2015","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.5.0","description":"PLG_MODULE_XML_DESCRIPTION","group":"","filename":"module"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-	(454, 0, 'plg_system_stats', 'plugin', 'stats', 'system', 0, 1, 1, 0, '{"name":"plg_system_stats","type":"plugin","creationDate":"November 2013","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.5.0","description":"PLG_SYSTEM_STATS_XML_DESCRIPTION","group":"","filename":"stats"}', '{"mode":1,"lastrun":1503294862,"unique_id":"1627c4b85f2b7f7ea20f6b15b29e07526d6a23f9","interval":12}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+	(454, 0, 'plg_system_stats', 'plugin', 'stats', 'system', 0, 1, 1, 0, '{"name":"plg_system_stats","type":"plugin","creationDate":"November 2013","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.5.0","description":"PLG_SYSTEM_STATS_XML_DESCRIPTION","group":"","filename":"stats"}', '{"mode":1,"lastrun":1503467551,"unique_id":"1627c4b85f2b7f7ea20f6b15b29e07526d6a23f9","interval":12}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 	(455, 0, 'plg_installer_packageinstaller', 'plugin', 'packageinstaller', 'installer', 0, 1, 1, 1, '{"name":"plg_installer_packageinstaller","type":"plugin","creationDate":"May 2016","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.6.0","description":"PLG_INSTALLER_PACKAGEINSTALLER_PLUGIN_XML_DESCRIPTION","group":"","filename":"packageinstaller"}', '', '', '', 0, '0000-00-00 00:00:00', 1, 0),
 	(456, 0, 'PLG_INSTALLER_FOLDERINSTALLER', 'plugin', 'folderinstaller', 'installer', 0, 1, 1, 1, '{"name":"PLG_INSTALLER_FOLDERINSTALLER","type":"plugin","creationDate":"May 2016","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.6.0","description":"PLG_INSTALLER_FOLDERINSTALLER_PLUGIN_XML_DESCRIPTION","group":"","filename":"folderinstaller"}', '', '', '', 0, '0000-00-00 00:00:00', 2, 0),
 	(457, 0, 'PLG_INSTALLER_URLINSTALLER', 'plugin', 'urlinstaller', 'installer', 0, 1, 1, 1, '{"name":"PLG_INSTALLER_URLINSTALLER","type":"plugin","creationDate":"May 2016","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.6.0","description":"PLG_INSTALLER_URLINSTALLER_PLUGIN_XML_DESCRIPTION","group":"","filename":"urlinstaller"}', '', '', '', 0, '0000-00-00 00:00:00', 3, 0),
@@ -705,7 +706,7 @@ INSERT INTO `pvtg0_extensions` (`extension_id`, `package_id`, `name`, `type`, `e
 	(10000, 10002, 'Russian', 'language', 'ru-RU', '', 0, 1, 0, 0, '{"name":"Russian","type":"language","creationDate":"2017-05-11","author":"Russian Translation Team","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"smart@joomlaportal.ru","authorUrl":"www.joomlaportal.ru","version":"3.7.0.1","description":"Russian language pack (site) for Joomla! 3.7.0","group":"","filename":"install"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 	(10001, 10002, 'ru-RU', 'language', 'ru-RU', '', 1, 1, 0, 0, '{"name":"\\u0420\\u0443\\u0441\\u0441\\u043a\\u0438\\u0439 (ru-RU)","type":"language","creationDate":"2017-05-11","author":"Russian Translation Team","copyright":"Copyright (C) 2005 - 2017 Open Source Matters. All rights reserved.","authorEmail":"smart@joomlaportal.ru","authorUrl":"www.joomlaportal.ru","version":"3.7.0.1","description":"Russian language pack (administrator) for Joomla! 3.7.0","group":"","filename":"install"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 	(10002, 0, 'Russian (ru-RU) Language Pack', 'package', 'pkg_ru-RU', '', 0, 1, 1, 0, '{"name":"Russian (ru-RU) Language Pack","type":"package","creationDate":"2017-05-11","author":"Russian Translation Team","copyright":"Copyright (C) 2005 - 2017 Open Source Matters, Inc. All rights reserved.","authorEmail":"smart@joomlaportal.ru","authorUrl":"www.joomlaportal.ru","version":"3.7.0.1","description":"Joomla 3.7 Russian Language Package","group":"","filename":"pkg_ru-RU"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-	(10013, 0, 'COM_BULLETIN_BOARD', 'component', 'com_bulletin_board', '', 1, 1, 0, 0, '{"name":"COM_BULLETIN_BOARD","type":"component","creationDate":"2017-08-17","author":"Dmitry Zatulenko","copyright":"Copyright Info","authorEmail":"","authorUrl":"","version":"1.0.0","description":"COM_BULLETIN_BOARD_XML_DESCRIPTION","group":"","filename":"manifest"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
+	(10015, 0, 'COM_BULLETINBOARD', 'component', 'com_bulletinboard', '', 1, 1, 0, 0, '{"name":"COM_BULLETINBOARD","type":"component","creationDate":"2017-08-17","author":"Dmitry Zatulenko","copyright":"Copyright Info","authorEmail":"","authorUrl":"","version":"1.0.0","description":"COM_BULLETINBOARD_XML_DESCRIPTION","group":"","filename":"manifest"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 /*!40000 ALTER TABLE `pvtg0_extensions` ENABLE KEYS */;
 
 
@@ -1409,7 +1410,7 @@ CREATE TABLE IF NOT EXISTS `pvtg0_menu` (
   KEY `idx_alias` (`alias`(100)),
   KEY `idx_path` (`path`(100)),
   KEY `idx_language` (`language`)
-) ENGINE=InnoDB AUTO_INCREMENT=145 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Дамп данных таблицы my_component.pvtg0_menu: ~26 rows (приблизительно)
 /*!40000 ALTER TABLE `pvtg0_menu` DISABLE KEYS */;
@@ -1436,10 +1437,10 @@ INSERT INTO `pvtg0_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `l
 	(21, 'main', 'com_postinstall', 'Post-installation messages', '', 'Post-installation messages', 'index.php?option=com_postinstall', 'component', 1, 1, 1, 32, 0, '0000-00-00 00:00:00', 0, 1, 'class:postinstall', 0, '', 37, 38, 0, '*', 1),
 	(22, 'main', 'com_associations', 'Multilingual Associations', '', 'Multilingual Associations', 'index.php?option=com_associations', 'component', 1, 1, 1, 34, 0, '0000-00-00 00:00:00', 0, 0, 'class:associations', 0, '', 39, 40, 0, '*', 1),
 	(101, 'mainmenu', 'Home', 'home', '', 'home', 'index.php?option=com_content&view=featured', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"featured_categories":[""],"layout_type":"blog","num_leading_articles":"1","num_intro_articles":"3","num_columns":"3","num_links":"0","multi_column_order":"1","orderby_pri":"","orderby_sec":"front","order_date":"","show_pagination":"2","show_pagination_results":"1","show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_readmore":"","show_readmore_title":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_noauth":"","show_feed_link":"1","feed_summary":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":1,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 41, 42, 1, '*', 0),
-	(141, 'main', 'COM_BULLETIN_BOARD_XML_MENU_NAME', 'com-bulletin-board-xml-menu-name', '', 'com-bulletin-board-xml-menu-name', 'index.php?option=com_bulletin_board', 'component', 1, 1, 1, 10013, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_bulletin_board/images/edit.png', 0, '{}', 43, 50, 0, '', 1),
-	(142, 'main', 'COM_BULLETIN_BOARD_XML_SUBMENU_POSTS', 'com-bulletin-board-xml-submenu-posts', '', 'com-bulletin-board-xml-menu-name/com-bulletin-board-xml-submenu-posts', 'index.php?option=com_bulletin_board&view=posts', 'component', 1, 141, 2, 10013, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 44, 45, 0, '', 1),
-	(143, 'main', 'COM_BULLETIN_BOARD_XML_SUBMENU_CATEGORIES', 'com-bulletin-board-xml-submenu-categories', '', 'com-bulletin-board-xml-menu-name/com-bulletin-board-xml-submenu-categories', 'index.php?option=com_bulletin_board&view=categories', 'component', 1, 141, 2, 10013, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 46, 47, 0, '', 1),
-	(144, 'main', 'COM_BULLETIN_BOARD_XML_SUBMENU_TYPES', 'com-bulletin-board-xml-submenu-types', '', 'com-bulletin-board-xml-menu-name/com-bulletin-board-xml-submenu-types', 'index.php?option=com_bulletin_board&view=types', 'component', 1, 141, 2, 10013, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 48, 49, 0, '', 1);
+	(149, 'main', 'COM_BULLETINBOARD_XML_MENU_NAME', 'com-bulletinboard-xml-menu-name', '', 'com-bulletinboard-xml-menu-name', 'index.php?option=com_bulletinboard', 'component', 1, 1, 1, 10015, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_bulletinboard/images/edit.png', 0, '{}', 43, 50, 0, '', 1),
+	(150, 'main', 'COM_BULLETINBOARD_XML_SUBMENU_POSTS', 'com-bulletinboard-xml-submenu-posts', '', 'com-bulletinboard-xml-menu-name/com-bulletinboard-xml-submenu-posts', 'index.php?option=com_bulletinboard&view=posts', 'component', 1, 149, 2, 10015, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 44, 45, 0, '', 1),
+	(151, 'main', 'COM_BULLETINBOARD_XML_SUBMENU_CATEGORIES', 'com-bulletinboard-xml-submenu-categories', '', 'com-bulletinboard-xml-menu-name/com-bulletinboard-xml-submenu-categories', 'index.php?option=com_bulletinboard&view=categories', 'component', 1, 149, 2, 10015, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 46, 47, 0, '', 1),
+	(152, 'main', 'COM_BULLETINBOARD_XML_SUBMENU_TYPES', 'com-bulletinboard-xml-submenu-types', '', 'com-bulletinboard-xml-menu-name/com-bulletinboard-xml-submenu-types', 'index.php?option=com_bulletinboard&view=types', 'component', 1, 149, 2, 10015, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 48, 49, 0, '', 1);
 /*!40000 ALTER TABLE `pvtg0_menu` ENABLE KEYS */;
 
 
@@ -1697,7 +1698,7 @@ CREATE TABLE IF NOT EXISTS `pvtg0_schemas` (
 /*!40000 ALTER TABLE `pvtg0_schemas` DISABLE KEYS */;
 INSERT INTO `pvtg0_schemas` (`extension_id`, `version_id`) VALUES
 	(700, '3.7.4-2017-07-05'),
-	(10013, '1.0.3');
+	(10015, '1.0.3');
 /*!40000 ALTER TABLE `pvtg0_schemas` ENABLE KEYS */;
 
 
@@ -1715,11 +1716,10 @@ CREATE TABLE IF NOT EXISTS `pvtg0_session` (
   KEY `time` (`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Дамп данных таблицы my_component.pvtg0_session: ~2 rows (приблизительно)
+-- Дамп данных таблицы my_component.pvtg0_session: ~1 rows (приблизительно)
 /*!40000 ALTER TABLE `pvtg0_session` DISABLE KEYS */;
 INSERT INTO `pvtg0_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-	('d8d154v5qe7inoksph9d9hd6g0', 0, 1, '1503324497', 'joomla|s:716:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTozOTtzOjU6InRva2VuIjtzOjMyOiJGMzRob2xIZXpxSFdxeG5PdGZoNTJueXBtZ1hVaXQyaSI7czo1OiJ0aW1lciI7Tzo4OiJzdGRDbGFzcyI6Mzp7czo1OiJzdGFydCI7aToxNTAzMjk1NjQ4O3M6NDoibGFzdCI7aToxNTAzMzIzNjU3O3M6Mzoibm93IjtpOjE1MDMzMjQ0OTc7fX1zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6MDp7fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fXM6NDoidXNlciI7Tzo1OiJKVXNlciI6MTp7czoyOiJpZCI7aTowO319fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==";', 0, ''),
-	('j0i0lo1he10r1rqk9i55gf7ko0', 1, 0, '1503324378', 'joomla|s:1300:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo1MjtzOjU6InRva2VuIjtzOjMyOiJRbmk2Y0ZlWVh5VXRCTGVPcmpCcjZESmlLUEpwanp5QyI7czo1OiJ0aW1lciI7Tzo4OiJzdGRDbGFzcyI6Mzp7czo1OiJzdGFydCI7aToxNTAzMzIwNzUzO3M6NDoibGFzdCI7aToxNTAzMzI0MzczO3M6Mzoibm93IjtpOjE1MDMzMjQzNzg7fX1zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMzoiY29tX3RlbXBsYXRlcyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo2OiJzdHlsZXMiO086ODoic3RkQ2xhc3MiOjQ6e3M6NjoiZmlsdGVyIjthOjM6e3M6Njoic2VhcmNoIjtzOjA6IiI7czo4OiJtZW51aXRlbSI7czowOiIiO3M6ODoidGVtcGxhdGUiO3M6MDoiIjt9czo5OiJjbGllbnRfaWQiO3M6MToiMSI7czo0OiJsaXN0IjthOjI6e3M6MTI6ImZ1bGxvcmRlcmluZyI7czowOiIiO3M6NToibGltaXQiO3M6MjoiMjAiO31zOjEwOiJsaW1pdHN0YXJ0IjtpOjA7fX1zOjEwOiJjb21fY29uZmlnIjtPOjg6InN0ZENsYXNzIjoxOntzOjY6ImNvbmZpZyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo2OiJnbG9iYWwiO086ODoic3RkQ2xhc3MiOjE6e3M6NDoiZGF0YSI7Tjt9fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9czo0OiJ1c2VyIjtPOjU6IkpVc2VyIjoxOntzOjI6ImlkIjtzOjM6IjExOCI7fXM6MTE6ImFwcGxpY2F0aW9uIjtPOjg6InN0ZENsYXNzIjoxOntzOjU6InF1ZXVlIjtOO319fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==";', 118, 'admin');
+	('g752q0kf8kocfcgnm077r5ane4', 1, 0, '1503499170', 'joomla|s:988:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo2MTtzOjU6InRva2VuIjtzOjMyOiJqR1Y0TkVtZzZVbTl6R2ROVlNLbEc2R1RJRFllMVRSVyI7czo1OiJ0aW1lciI7Tzo4OiJzdGRDbGFzcyI6Mzp7czo1OiJzdGFydCI7aToxNTAzNDg3NDE5O3M6NDoibGFzdCI7aToxNTAzNDk4MzMwO3M6Mzoibm93IjtpOjE1MDM0OTkxNzA7fX1zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6MTp7czoxNzoiY29tX2J1bGxldGluYm9hcmQiO086ODoic3RkQ2xhc3MiOjE6e3M6NDoiZWRpdCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJ0eXBlIjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6ImRhdGEiO047czoyOiJpZCI7YToyOntpOjA7aToxO2k6MTtpOjI7fX19fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjowO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086NToiSlVzZXIiOjE6e3M6MjoiaWQiO3M6MzoiMTE4Ijt9czoxMToiYXBwbGljYXRpb24iO086ODoic3RkQ2xhc3MiOjE6e3M6NToicXVldWUiO047fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 118, 'admin');
 /*!40000 ALTER TABLE `pvtg0_session` ENABLE KEYS */;
 
 
@@ -1927,9 +1927,9 @@ CREATE TABLE IF NOT EXISTS `pvtg0_update_sites` (
 -- Дамп данных таблицы my_component.pvtg0_update_sites: ~3 rows (приблизительно)
 /*!40000 ALTER TABLE `pvtg0_update_sites` DISABLE KEYS */;
 INSERT INTO `pvtg0_update_sites` (`update_site_id`, `name`, `type`, `location`, `enabled`, `last_check_timestamp`, `extra_query`) VALUES
-	(1, 'Joomla! Core', 'collection', 'https://update.joomla.org/core/list.xml', 1, 1503318081, ''),
-	(2, 'Accredited Joomla! Translations', 'collection', 'https://update.joomla.org/language/translationlist_3.xml', 1, 1503318101, ''),
-	(3, 'Joomla! Update Component Update Site', 'extension', 'https://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1503318121, '');
+	(1, 'Joomla! Core', 'collection', 'https://update.joomla.org/core/list.xml', 1, 1503489789, ''),
+	(2, 'Accredited Joomla! Translations', 'collection', 'https://update.joomla.org/language/translationlist_3.xml', 1, 1503386161, ''),
+	(3, 'Joomla! Update Component Update Site', 'extension', 'https://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1503386181, '');
 /*!40000 ALTER TABLE `pvtg0_update_sites` ENABLE KEYS */;
 
 
@@ -2007,7 +2007,7 @@ CREATE TABLE IF NOT EXISTS `pvtg0_users` (
 -- Дамп данных таблицы my_component.pvtg0_users: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `pvtg0_users` DISABLE KEYS */;
 INSERT INTO `pvtg0_users` (`id`, `name`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
-	(118, 'Super User', 'admin', 'z@mail.ru', '$2y$10$2byTckgYFlVKCk2SMS77TOjBjz4w2QzgOn6bUJncH3z92kSscbPte', 0, 1, '2017-08-17 11:34:37', '2017-08-21 13:05:53', '0', '', '0000-00-00 00:00:00', 0, '', '', 0);
+	(118, 'Super User', 'admin', 'z@mail.ru', '$2y$10$2byTckgYFlVKCk2SMS77TOjBjz4w2QzgOn6bUJncH3z92kSscbPte', 0, 1, '2017-08-17 11:34:37', '2017-08-23 11:23:39', '0', '', '0000-00-00 00:00:00', 0, '', '', 0);
 /*!40000 ALTER TABLE `pvtg0_users` ENABLE KEYS */;
 
 
