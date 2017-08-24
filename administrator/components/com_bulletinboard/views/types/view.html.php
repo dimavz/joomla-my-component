@@ -2,11 +2,17 @@
 defined('_JEXEC') or die('Restricted Access');
 
 class BulletinBoardViewTypes extends JViewLegacy {
+	
+	protected $items;
 
 	public function display($tpl = null)
 	{
 		$this->addToolBar();
 		$this->setDocument();
+		
+		$this->items = $this->get('Items'); //Обращаемся к методу модели getItems 
+		//var_dump($this->items);
+		
 		// Display the view
 		parent::display($tpl);
 	}
@@ -21,21 +27,7 @@ class BulletinBoardViewTypes extends JViewLegacy {
 		JToolbarHelper::publish('types.publish','JTOOLBAR_PUBLISH',TRUE);
 		JToolbarHelper::unpublish('types.unpublish','JTOOLBAR_UNPUBLISH',TRUE);
 		JToolbarHelper::deleteList(JText::_('COM_BULLETINBOARD_MANAGER_TYPES_DELETE_MSG'),'types.delete');
-		//JToolbarHelper::editHtml();
-		//JToolbarHelper::editCss();
-		//JToolbarHelper::help('help');
-		//JToolbarHelper::save();
-		//JToolbarHelper::trash();
-		//JToolbarHelper::preview();
-		//JToolbarHelper::cancel();
-		// Пример с пользовательской кнопкой
-		//JToolbarHelper::custom('type.create','bulletin-board','bulletin-board_hover','JTOOLBAR_PUBLISH', false);
 		JToolbarHelper::preferences('com_bulletinboard');
-
-		// echo JUri::root()."<br/>";
-		// echo JUri::base()."<br/>";
-		// echo JUri::current()."<br/>";
-		//print_r(JUri::getInstance()->getVar('view'));
 	}
 
 	protected function setDocument(){

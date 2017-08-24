@@ -8,11 +8,12 @@ class BulletinBoardViewType extends JViewLegacy {
 	
 	public function display($tpl = null)
 	{
-		$this->form = $this->get('Form'); //getForm
-		//var_dump($this->form);
-
+		$this->form = $this->get('Form'); //обращение к методу getForm
+		$this->item = $this->get('Item'); //обращение к методу getItem
+		//print_r($this->item);
 		$this->addToolBar();
 		$this->setDocument();
+		
 		// Display the view
 		parent::display($tpl);
 	}

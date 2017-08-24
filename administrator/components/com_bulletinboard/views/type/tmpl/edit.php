@@ -3,7 +3,7 @@ defined('_JEXEC') or die('Restricted Access');
 JHtml::_('formbehavior.chosen','select');
 JHtml::_('behavior.keepalive');
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_bulletinboard&layout=edit');?>" method="post" id="adminForm" name="adminForm" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_bulletinboard&layout=edit&id='.(int)$this->item->id.'');?>" method="post" id="adminForm" name="adminForm" class="form-validate">
 	<div class="row-fluid">
 		<div class="span9">
 			<?php echo JLayoutHelper::render('edit.title_alias',$this,'administrator/components/com_bulletinboard/'); ?>
@@ -13,7 +13,7 @@ JHtml::_('behavior.keepalive');
 		</div>
 	</div>
 	
-	<?php //echo $this->form->renderFieldset('basic'); ?>	
+	<?php echo $this->form->getField('id')->renderField();?>	
 	<input type="hidden" name="task" value="type.edit" />
 	<?php echo JHtml::_('form.token'); //JHtmlForm ?>	
 </form>

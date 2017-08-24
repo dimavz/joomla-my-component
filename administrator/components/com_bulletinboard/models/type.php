@@ -18,6 +18,15 @@ class BulletinBoardModelType extends JModelAdmin{
 	public function getTable($type='Type',$prefix='BulletinBoardTable',$config=array()){
 		return JTable::getInstance($type,$prefix,$config);
 	}
+	
+	protected function loadFormData()
+	{
+		$data = JFactory::getApplication()->getUserState('com_bulletinboard.edit.type.data');
+		if(empty($data)){
+			$data = $this->getItem();
+		}
+		return $data;
+	}
 
 }
 
