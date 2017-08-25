@@ -13,12 +13,18 @@ class BulletinBoardViewTest extends JViewLegacy {
 		$query->from($db->quoteName('#__menu'));
 		$query->where($db->quoteName('id').'>'.$db->quote($id));
 		
+		$db->setQuery($query);
+		//$result = $db->loadAssocList('id','link');
+		//$result = $db->loadAssoc();
+		//$result = $db->loadRow();
+		$result = $db->loadRowList();
+		
 		
 		
 		echo $query;
-		$result = '';
+		//$result = '';
 		echo"<pre>";
-		//print_r($db);
+		print_r($result);
 		echo"</pre>";
 		
 		// Display the view
