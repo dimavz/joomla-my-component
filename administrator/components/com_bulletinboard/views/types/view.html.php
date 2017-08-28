@@ -22,7 +22,7 @@ class BulletinBoardViewTypes extends JViewLegacy {
 		//JToolbarHelper::title(JText::_('COM_BULLETINBOARD_MANAGER_TYPES'),'bulletin-board'); 
 		JToolbarHelper::title(JText::_('COM_BULLETINBOARD_MANAGER_TYPES'));
 		JToolbarHelper::addNew('type.add',JText::_('COM_BULLETINBOARD_MANAGER_TYPES_ADD'));
-		JToolbarHelper::editList('types.edit',JText::_('COM_BULLETINBOARD_MANAGER_TYPES_EDIT'));
+		JToolbarHelper::editList('type.edit',JText::_('COM_BULLETINBOARD_MANAGER_TYPES_EDIT'));
 		JToolbarHelper::divider();
 		JToolbarHelper::publish('types.publish','JTOOLBAR_PUBLISH',TRUE);
 		JToolbarHelper::unpublish('types.unpublish','JTOOLBAR_UNPUBLISH',TRUE);

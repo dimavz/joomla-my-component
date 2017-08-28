@@ -17,11 +17,14 @@ class BulletinBoardViewTest extends JViewLegacy {
 		//$result = $db->loadAssocList('id','link');
 		//$result = $db->loadAssoc();
 		//$result = $db->loadRow();
-		$result = $db->loadRowList();
+		//$result = $db->loadRowList();
 		
 		
 		
 		echo $query;
+		$db->execute();
+		echo "<br/>";
+		echo $db->getNumRows();
 		//$result = '';
 		echo"<pre>";
 		print_r($result);

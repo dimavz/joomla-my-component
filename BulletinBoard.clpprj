@@ -481,8 +481,6 @@
 			<todo name="TODO : move this out of the plugin" pos="3;361"/>
 		</todofile>
 	</todoblock>
-	<dbgurls>
-	</dbgurls>
 	<filescache>
 		<file name="G:\OpenServer\domains\mycomponent.loc\tmp\index.html" crc="1500974408"/>
 		<file name="G:\OpenServer\domains\mycomponent.loc\templates\system\html\modules.php" crc="1500974408"/>
@@ -5247,7 +5245,7 @@
 		<file name="G:\OpenServer\domains\mycomponent.loc\administrator\components\com_bulletinboard\views\type\tmpl\edit.php" crc="1503571682"/>
 		<file name="G:\OpenServer\domains\mycomponent.loc\administrator\components\com_bulletinboard\views\type\view.html.php" crc="1503568747"/>
 		<file name="G:\OpenServer\domains\mycomponent.loc\administrator\components\com_bulletinboard\views\test\tmpl\default.php" crc="1503583920"/>
-		<file name="G:\OpenServer\domains\mycomponent.loc\administrator\components\com_bulletinboard\views\test\view.html.php" crc="1503643645"/>
+		<file name="G:\OpenServer\domains\mycomponent.loc\administrator\components\com_bulletinboard\views\test\view.html.php" crc="1503665485"/>
 		<file name="G:\OpenServer\domains\mycomponent.loc\administrator\components\com_bulletinboard\views\posts\tmpl\default.php" crc="1503393976"/>
 		<file name="G:\OpenServer\domains\mycomponent.loc\administrator\components\com_bulletinboard\views\posts\view.html.php" crc="1503393976"/>
 		<file name="G:\OpenServer\domains\mycomponent.loc\administrator\components\com_bulletinboard\views\categories\tmpl\default.php" crc="1503393976"/>
