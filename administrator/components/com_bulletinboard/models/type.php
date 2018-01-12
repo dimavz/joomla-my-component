@@ -15,7 +15,17 @@ class BulletinBoardModelType extends JModelAdmin{
 		return $form;
 	}
 	
-	public function getTable($type='Type',$prefix='BulletinBoardTable',$config=array()){
+	public function getTable($type='Type'/**
+										 * 
+										 * @var /Имя класса таблицы
+										 * 
+										 */,
+										 $prefix='BulletinBoardTable',
+										 $config=array()/**
+														* 
+														* @var массив настроек
+														* 
+														*/){
 		return JTable::getInstance($type,$prefix,$config);
 	}
 	

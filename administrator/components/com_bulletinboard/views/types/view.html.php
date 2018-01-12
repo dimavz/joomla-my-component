@@ -27,9 +27,11 @@ class BulletinBoardViewTypes extends JViewLegacy {
 		JToolbarHelper::publish('types.publish','JTOOLBAR_PUBLISH',TRUE);
 		JToolbarHelper::unpublish('types.unpublish','JTOOLBAR_UNPUBLISH',TRUE);
 		JToolbarHelper::deleteList(JText::_('COM_BULLETINBOARD_MANAGER_TYPES_DELETE_MSG'),'types.delete');
+		JToolbarHelper::trash();
+		//JToolbarHelper::preview();
 		JToolbarHelper::preferences('com_bulletinboard');
 	}
-
+	
 	protected function setDocument(){
 		$doc = JFactory::getDocument();
 		$doc->addStyleSheet(JUri::root(true)."/media/com_bulletinboard/css/style.css");
